@@ -1,6 +1,6 @@
-# VBScared Social Engineering Tool 💀
+# VBScared Tool 💀
 
-VBScared is an executable, disguised as a .jpg file, that executes a reverse shell upon double clicking. The executable can be delivered to victims via social engineering tactics.
+VBScared is an executable, disguised as a .jpg file, that executes a VBScript in-memory reverse shell upon double clicking. The executable can be delivered to victims via social engineering tactics.
 
 ## Compile resources
 
