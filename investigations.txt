@@ -1,0 +1,120 @@
+[2024-10-30T16:46:05.618416]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------[2024-10-30T16:46:07.652710]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:11.787346]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:13.926692]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------[2024-10-30T16:46:15.949869]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:18.038170]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------[2024-10-30T16:46:20.080355]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:22.183793]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------[2024-10-30T16:46:24.230688]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:26.318441]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------[2024-10-30T16:46:28.344700]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:30.437818]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------[2024-10-30T16:46:32.461606]127.0.0.1:
+GET //s/VBSSIGNATURE:crocus-butter: HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Host: localhost
+------------------[2024-10-30T16:46:34.552667]127.0.0.1:
+POST / HTTP/1.1
+Connection: Keep-Alive
+Accept: */*
+Accept-Language: en-BE,en-GB;q=0.8,en-US;q=0.7,en;q=0.5,fr-BE;q=0.3,fr;q=0.2
+User-Agent: Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5)
+Content-Length: 27
+Host: localhost
+
+VBSSIGNATURE:crocus-butter:
+------------------
