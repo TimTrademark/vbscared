@@ -2,3 +2,8 @@
 *.obj
 *.o
 *.jpg
+**/__pycache__
+*.pyc
+c2/__pycache__/*.pyc
+client_data/
+client_log/

