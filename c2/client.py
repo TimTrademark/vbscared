@@ -1,4 +1,4 @@
-import uuid
+from utils.encrypt import encrypt_decrypt
 import friendlywords as fw
 import time
 
@@ -14,8 +14,12 @@ class Client:
         self.cmd = "NOP"
         return cmd
     
-    def set_cmd(self, cmd:str):
-        self.cmd = cmd
+    def set_cmd(self, cmd:str, key: str):
+        self._set_encrypted_cmd(cmd, key)
+    
+    def _set_encrypted_cmd(self, cmd: str, key: str):
+        self.cmd = encrypt_decrypt(cmd,key)
+        
     
     def set_ip(self, ip: str):
         self.ip = ip

