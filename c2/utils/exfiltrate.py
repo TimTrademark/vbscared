@@ -25,5 +25,8 @@ def recreate_filesystem(root_folder: str, items: List[ExfiltrateItem]):
         if i.type == 'd':
             Path(root_folder + "/" + i.name.replace(":","")).mkdir(parents=True, exist_ok=True)
         else:
+            splitted = i.name.replace(":","").split("\\")
+            foldername = '\\'.join(splitted[:len(splitted)-1])
+            Path(root_folder + "/" + foldername).mkdir(parents=True, exist_ok=True)
             with open(root_folder + "/" + i.name.replace(":",""), 'w') as f:
                 f.write(i.content)
