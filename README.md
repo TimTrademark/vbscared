@@ -11,8 +11,8 @@ https://github.com/user-attachments/assets/223b6022-3abf-4a4d-b086-1ede8bb9ca19
 2 tools are needed during compilation. Add the following binaries to your PATH:
 
 * [Windres](https://winlibs.com/) (this is needed to attach icons to the generated executable and is included in mingw-w64, scroll down to find the downloads)
-* [CL](https://visualstudio.microsoft.com/) (included in visual studio, example path C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64\cl.exe)
-* [VsDevCmd](https://visualstudio.microsoft.com/) (included in visual studio, example path C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat)
+* [CL](https://visualstudio.microsoft.com/) (included in visual studio, example path `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64\cl.exe`)
+* [VsDevCmd](https://visualstudio.microsoft.com/) (included in visual studio, example path `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat`)
 
 Next, install the necessary python packages using `py -3 -m pip install -r requirements.txt`.
 
